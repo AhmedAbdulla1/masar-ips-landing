@@ -175,24 +175,7 @@
             </svg>
             <span>رمز QR</span>
           </button>
-        </div>
-
-        <!-- Collapsible QR Code Panel (For Desktop Visitors) -->
-        <div class="qr-panel" id="qrPanel" hidden>
-          <div class="qr-box">
-            <img 
-              id="qrImage" 
-              src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fmasar.tranex.site&bgcolor=11141a&color=d4af37&margin=1" 
-              alt="QR Code لتحميل التطبيق" 
-              width="150" 
-              height="150" 
-              loading="lazy"
-            />
-          </div>
-          <p class="qr-caption">امسح بكاميرا الهاتف للتحميل الفوري</p>
-        </div>
-
-        <!-- Subtle Tranex Indicator (Discreet & Elegant) -->
+        </div>        <!-- Subtle Tranex Indicator (Discreet & Elegant) -->
         <footer class="app-footer">
           <div class="tranex-signature">
             <span class="signature-dot" aria-hidden="true"></span>
@@ -204,6 +187,48 @@
 
     </div>
   </main>
+
+  
+  <!-- QR Code Modal Dialog -->
+  <div class="qr-modal" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+    <div class="qr-backdrop" id="qrBackdrop"></div>
+    <div class="qr-dialog">
+      <button type="button" class="qr-close-btn" id="closeQrBtn" aria-label="إغلاق">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="qr-header">
+        <div class="qr-icon-badge" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+        <h2 class="qr-title" id="qrModalTitle">مسح رمز QR للتحميل</h2>
+        <p class="qr-subtitle">وجه كاميرا هاتفك لتحميل تطبيق مسار - IPS مباشرة</p>
+      </div>
+
+      <div class="qr-image-wrapper">
+        <img 
+          src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fmasar.tranex.site&bgcolor=11141a&color=d4af37&margin=1" 
+          alt="QR Code لتحميل تطبيق مسار IPS"
+          class="qr-code-img"
+          width="180"
+          height="180"
+        />
+      </div>
+
+      <div class="qr-link-badge">
+        <span class="qr-link-dot" aria-hidden="true"></span>
+        <span>masar.tranex.site</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Notification Toast -->
   <div class="toast" id="toast" role="alert" aria-live="polite">تم نسخ الرابط بنجاح!</div>

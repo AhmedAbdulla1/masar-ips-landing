@@ -1,4 +1,4 @@
-﻿/**
+/**
  * مسار - IPS | Logic & Smart Device Detection
  * Domain: masar.tranex.site
  */
@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const googleBtn = document.getElementById('googlePlayBtn');
   const shareBtn = document.getElementById('shareBtn');
   const qrToggleBtn = document.getElementById('qrToggleBtn');
-  const qrPanel = document.getElementById('qrPanel');
+  const qrModal = document.getElementById('qrModal');
+  const closeQrBtn = document.getElementById('closeQrBtn');
+  const qrBackdrop = document.getElementById('qrBackdrop');
   const toast = document.getElementById('toast');
 
   const canonicalUrl = 'https://masar.tranex.site';
@@ -21,13 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const isAndroid = /android/i.test(userAgent);
 
     if (isIOS) {
-      if (appleBtn) {
-        appleBtn.classList.add('is-recommended');
-      }
+      if (appleBtn) appleBtn.classList.add('is-recommended');
     } else if (isAndroid) {
-      if (googleBtn) {
-        googleBtn.classList.add('is-recommended');
-      }
+      if (googleBtn) googleBtn.classList.add('is-recommended');
     }
   }
 
@@ -88,17 +86,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2600);
   }
 
-  // 4. Toggle QR Code for Desktop Viewers
-  if (qrToggleBtn && qrPanel) {
-    qrToggleBtn.addEventListener('click', () => {
-      const isHidden = qrPanel.hasAttribute('hidden');
-      if (isHidden) {
-        qrPanel.removeAttribute('hidden');
-        qrToggleBtn.classList.add('active');
-      } else {
-        qrPanel.setAttribute('hidden', '');
-        qrToggleBtn.classList.remove('active');
-      }
-    });
+  // 4. QR Code Modal Dialog Handlers
+  function openQrModal() {
+    if (!qrModal) return;
+    qrModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeQrModal() {
+    if (!qrModal) return;
+    qrModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  if (qrToggleBtn) {
+    qrToggleBtn.addEventListener('click', openQrModal);
+  }
+
+  if (closeQrBtn) {
+    closeQrBtn.addEventListener('click', closeQrModal);
+  }
+
+  if (qrBackdrop) {
+    qrBackdrop.addEventListener('click', closeQrModal);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && qrModal && qrModal.classList.contains('show')) {
+      closeQrModal();
+    }
+  });
 });
